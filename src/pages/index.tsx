@@ -1,14 +1,17 @@
 import { api } from "../utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
+import { useDrink } from "src/utils/useDrink";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
-  const handleClick = () => {
-    console.log("a drink was selected");
-  };
+  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const { data, error, isLoading } = useDrink();
+  // const handleClick = () => {
+  //   console.log("a drink was selected", hello);
+  // };
+  if (error) return <div>Request Failed</div>;
+  if (isLoading) return <div>Loading</div>;
+  console.log(data);
   return (
     <>
       <Head>
@@ -26,14 +29,14 @@ const Home: NextPage = () => {
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <div
-              onClick={handleClick}
+              // onClick={handleClick}
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
             >
               <h3 className="text-2xl font-bold">Old fashioned</h3>
               <div className="text-lg">Photo</div>
             </div>
             <div
-              onClick={handleClick}
+              // onClick={handleClick}
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
             >
               <h3 className="text-2xl font-bold">Daiquiri</h3>
@@ -41,6 +44,9 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
+        {/* <p className="text-2xl text-white">
+          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+        </p> */}
       </main>
     </>
   );
