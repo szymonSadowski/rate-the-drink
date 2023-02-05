@@ -5,5 +5,6 @@ export const useDrink = () => {
   return useQuery({
     queryKey: ["drinks"],
     queryFn: () => getDrinks(),
+    cacheTime: 1000 * 60 * 1000,
   });
 };

@@ -14,5 +14,18 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  // images: {
+  //   domains: ["thecocktaildb.com"],
+  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.thecocktaildb.com",
+        port: "",
+        pathname: "/images/media/drink/**",
+      },
+    ],
+  },
 };
 export default config;

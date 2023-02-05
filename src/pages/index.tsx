@@ -61,7 +61,7 @@ const Home: NextPage = () => {
                   </h3>
                   <Image
                     src={data.drinks[randomDrinks.second]?.strDrinkThumb}
-                    alt="First drink thumb"
+                    alt="Second drink thumb"
                     width={350}
                     height={350}
                     className="animate-fade-in"
