@@ -3,14 +3,14 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import type { AppRouter } from "src/server/api/root";
 import { getRandomDrinks } from "src/utils/selectRandomDrinks";
 
 const Home: NextPage = () => {
   const [randomDrinks, setRandomDrinks] = useState(getRandomDrinks());
+  const mutation = api.voting.vote.useMutation();
   const drinks = api.voting.resultVoting.useQuery();
   const handleClick = (id: string) => {
-    console.log(id);
+    mutation.mutate(id);
     setRandomDrinks(getRandomDrinks());
   };
   return (
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
             Rate That <span className="text-pink-600">Drink</span>
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            {drinks.data && (
+            {drinks.data && !mutation.isLoading && (
               <>
                 <div
                   onClick={() =>
