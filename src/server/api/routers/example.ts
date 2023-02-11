@@ -4,15 +4,24 @@ import { prisma } from "src/server/db";
 import { z } from "zod";
 
 export const votingRouter = createTRPCRouter({
-  resultVoting: publicProcedure
-    .input(z.object({ name: z.string() }))
-    .query(async ({ input }) => {
-      const drinks = await prisma.drinks.findUnique({
-        where: { name: input.name },
-      });
-
-      return {
-        result: drinks,
-      };
-    }),
+  resultVoting: publicProcedure.query(async () => {
+    const res = await prisma.drinks.findMany();
+    const drinks = res;
+    return {
+      result: drinks,
+    };
+  }),
+  vote: publicProcedure.input(z.string()).mutation(async ({ input }) => {
+    const res = await prisma.drinks.update({
+      where: {
+        id: input,
+      },
+      data: {
+        votedFor: {
+          increment: 1,
+        },
+      },
+    });
+    return { success: true, result: res };
+  }),
 });
