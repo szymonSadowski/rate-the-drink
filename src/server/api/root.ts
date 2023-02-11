@@ -1,4 +1,4 @@
-import { votingRouter } from "./routers/example";
+import { votingRouter } from "./routers/voting";
 import { createTRPCRouter } from "./trpc";
 
 /**

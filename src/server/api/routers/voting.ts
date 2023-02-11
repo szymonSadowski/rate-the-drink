@@ -1,11 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { prisma } from "src/server/db";
 import { z } from "zod";
 
 export const votingRouter = createTRPCRouter({
   resultVoting: publicProcedure.query(async () => {
-    const res = await prisma.drinks.findMany();
+    const res = await prisma.drinks.findMany({
+      orderBy: [
+        {
+          votedFor: "desc",
+        },
+      ],
+    });
     const drinks = res;
     return {
       result: drinks,
