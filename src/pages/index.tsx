@@ -1,3 +1,4 @@
+import { api } from "../utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -8,6 +9,7 @@ import { useDrink } from "src/utils/useDrink";
 const Home: NextPage = () => {
   const { data, isLoading, isError } = useDrink();
   const [randomDrinks, setRandomDrinks] = useState(getRandomDrinks());
+  const hello = api.voting.resultVoting.useQuery({ name: "old fashioned" });
   if (isLoading) return <div>null</div>;
   if (isError) return <div>Request Failed</div>;
 
