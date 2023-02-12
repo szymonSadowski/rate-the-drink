@@ -3,6 +3,12 @@ import Link from "next/link";
 import { Layout } from "src/components/Layout";
 import { api } from "src/utils/api";
 
+interface Drink {
+  id: string;
+  name: string;
+  image: string;
+  votedFor: number;
+}
 const Leaderboard: NextPage = () => {
   const drinks = api.voting.resultVoting.useQuery();
   return (
@@ -12,7 +18,7 @@ const Leaderboard: NextPage = () => {
       </h1>
       {drinks.data && (
         <div className="bg-gradient-to-b from-pink-300 to-pink-100 mt-12">
-          {drinks.data.result.map((drink, index) => (
+          {drinks.data.result.map((drink: Drink, index) => (
             <div
               key={drink.id}
               className="grid grid-cols-6 max-w-s p-4 border border-white"
