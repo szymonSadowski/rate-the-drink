@@ -17,7 +17,7 @@ const Leaderboard: NextPage = () => {
               key={drink.id}
               className="grid grid-cols-6 max-w-s p-4 border border-white"
             >
-              <span>{index}.</span>
+              <span>{index + 1}.</span>
               <span className="col-span-4">{drink.name}</span>
               <span>{drink.votedFor}</span>
             </div>
